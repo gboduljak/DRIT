@@ -1,6 +1,8 @@
-import networks
 import torch
 import torch.nn as nn
+
+import networks
+
 
 class DRIT(nn.Module):
   def __init__(self, opts):
@@ -298,6 +300,7 @@ class DRIT(nn.Module):
     # update G, Ec
     self.enc_c_opt.zero_grad()
     self.gen_opt.zero_grad()
+    self.forward() # call forward() to using new network parameters to compute variables
     self.backward_G_alone()
     self.enc_c_opt.step()
     self.gen_opt.step()
